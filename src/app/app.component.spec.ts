@@ -32,4 +32,9 @@ describe('AppComponent', () => {
     const compiled = fixture.debugElement.nativeElement;
     expect(compiled.querySelector('h1').textContent).toContain('Welcome to tic-tac-toe!');
   });
+
+  it('should display user1 name input', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    expect(fixture.componentInstance.player1.name.length).toBe(0);
+  });
 });
