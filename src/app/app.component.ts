@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Player } from './models/Player';
 
 @Component({
@@ -15,4 +15,5 @@ export class AppComponent {
     this.player1 = new Player();
     this.player2 = new Player();
   }
+
 }
