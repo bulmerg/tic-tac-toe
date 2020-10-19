@@ -33,7 +33,7 @@ describe('AppComponent', () => {
     expect(compiled.querySelector('h1').textContent).toContain('Welcome to tic-tac-toe!');
   });
 
-  it('should have empty player1 and player2 name input', () => {
+  it('should have empty player1 name input', () => {
     const fixture = TestBed.createComponent(AppComponent);
     expect(fixture.componentInstance.player1.name.length).toBe(0);
   });
@@ -41,5 +41,15 @@ describe('AppComponent', () => {
   it('should have and empty player1 value', () => {
     const fixture = TestBed.createComponent(AppComponent);
     expect(fixture.componentInstance.player1.value.length).toBe(0);
+  });
+
+  it('should have empty player2 name input', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    expect(fixture.componentInstance.player2.name.length).toBe(0);
+  });
+
+  it('should have and empty player2 value', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    expect(fixture.componentInstance.player2.value.length).toBe(0);
   });
 });
