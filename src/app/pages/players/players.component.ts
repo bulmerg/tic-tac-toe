@@ -19,6 +19,6 @@ export class PlayersComponent implements OnInit {
   }
 
   setPlayerValue(player: number, value: string) {
-    this.players[player].value = value;
+    this.players[player].value = value === 'X' || value === 'O' ? value : '';
   }
 }
