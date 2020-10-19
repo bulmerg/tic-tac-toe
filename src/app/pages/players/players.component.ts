@@ -8,11 +8,17 @@ import { Player } from '../../models/Player';
   styleUrls: ['./players.component.css']
 })
 export class PlayersComponent implements OnInit {
-  player1: Player;
-  player2: Player;
-  constructor() { }
+  players: Player[] = [];
+  constructor() { 
+    
+    this.players.push(new Player());
+    this.players.push(new Player());
+  }
 
   ngOnInit() {
   }
 
+  setPlayerValue(player: number, value: string) {
+    this.players[player].value = value;
+  }
 }
