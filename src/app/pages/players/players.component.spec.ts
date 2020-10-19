@@ -48,9 +48,14 @@ describe('PlayersComponent', () => {
     fixture.componentInstance.setPlayerValue(playerId, 'X');
     expect(fixture.componentInstance.players[playerId].value).toEqual('X');
 
-    // let playerId2 = 2;
-    // this.setPlayerValue(playerId2, 'O');
-    // expect(fixture.componentInstance.player2.value).toEqual('X');
+    let playerId2 = 1;
+    fixture.componentInstance.setPlayerValue(playerId2, 'O');
+    expect(fixture.componentInstance.players[playerId2].value).toEqual('O');
+  });
 
+  it('should only allow "X" or "O" as the player value', () => {
+    let playerId = 0;
+    fixture.componentInstance.setPlayerValue(playerId, 'Z');
+    expect(fixture.componentInstance.players[playerId].value.length).toBe(0);
   });
 });
