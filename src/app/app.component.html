@@ -1,19 +1,23 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <style>
-    table, th , td  {
-      border: 1px solid grey;
-      border-collapse: collapse;
-      padding: 5px;
-      column-width: 75px; 
-      height: 75px;
-    }
-    table tr:nth-child(odd) {
-      background-color: #f1f1f1;
-    }
-    table tr:nth-child(even) {
-      background-color: #ffffff;
-    }
-    </style>
+  table,
+  th,
+  td {
+    border: 1px solid grey;
+    border-collapse: collapse;
+    padding: 5px;
+    column-width: 75px;
+    height: 75px;
+  }
+
+  table tr:nth-child(odd) {
+    background-color: #f1f1f1;
+  }
+
+  table tr:nth-child(even) {
+    background-color: #ffffff;
+  }
+</style>
 <div style="text-align:center">
   <h1>
     Welcome to {{ title }}!
@@ -23,23 +27,28 @@
 <div>
   <players></players>
 </div>
-<div>
-  <table>
-    <tr #row1>
-      <td #square1 id="square1"></td>
-      <td #square2></td>
-      <td #square3></td>
-    </tr>
-    <tr #row2>
-      <td #square4></td>
-      <td #square5></td>
-      <td #square6></td>
-    </tr>
-    <tr #row3>
-      <td #square7></td>
-      <td #square8></td>
-      <td #square9></td>
-    </tr>
-  </table>
-</div>
+<form [formGroup]="grid">
+  <div class="container">
+    <table>
+      <tr #row1>
+        <td id="square1Cell" (click)="handleSquareClick('X')">
+          <input formControlName="square1" readonly>
+        </td>
+        <td #square2></td>
+        <td #square3></td>
+      </tr>
+      <tr #row2>
+        <td #square4></td>
+        <td #square5></td>
+        <td #square6></td>
+      </tr>
+      <tr #row3>
+        <td #square7></td>
+        <td #square8></td>
+        <td #square9></td>
+      </tr>
+    </table>
+  </div>
+</form>
+
 <router-outlet></router-outlet>

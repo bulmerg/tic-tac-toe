@@ -1,15 +1,20 @@
-import { TestBed, async, fakeAsync } from '@angular/core/testing';
+import { TestBed, async, fakeAsync, ComponentFixture } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { tick, markDirty } from '@angular/core/src/render3';
 
 describe('AppComponent', () => {
+  let component: AppComponent;
+  let fixture: ComponentFixture<AppComponent>;
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule
+        RouterTestingModule,
+        ReactiveFormsModule,
+        FormsModule
       ],
       declarations: [
         AppComponent,
@@ -17,6 +22,13 @@ describe('AppComponent', () => {
       ],
     }).compileComponents();
   }));
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(AppComponent);
+    component = fixture.componentInstance;
+    component.ngOnInit();
+    fixture.detectChanges();
+  });
 
   @Component({
     selector: 'players',
@@ -27,35 +39,27 @@ describe('AppComponent', () => {
 
 
   it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
   });
 
   it(`should have as title 'tic-tac-toe'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app.title).toEqual('tic-tac-toe');
   });
 
   it('should render title in a h1 tag', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
     expect(compiled.querySelector('h1').textContent).toContain('Welcome to tic-tac-toe!');
   });
 
-  it('should display players value when clicked (row1, col1)', async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    spyOn(fixture.componentInstance, 'handleSquareClick');
+  it('should display players value when clicked (row1, col1)', () => {
+    let componentRef = fixture.componentRef;
     fixture.componentInstance.handleSquareClick('X');
-    const square = fixture.debugElement.nativeElement.querySelector('#square1');
-    square.click();
-    
+
     fixture.whenStable().then( () => {
       expect(fixture.componentInstance.handleSquareClick).toHaveBeenCalled();
-      expect(square.value).toEqual('X');
+      expect(fixture.componentInstance.grid.get("square1").value).toEqual('X');
     });
-    
-  }));
+  });
 });
