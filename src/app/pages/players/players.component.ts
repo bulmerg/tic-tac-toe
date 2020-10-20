@@ -8,13 +8,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./players.component.css']
 })
 export class PlayersComponent implements OnInit {
-  player1: Player;
-  player2: Player;
   playersForm: FormGroup;
-  constructor(private fb: FormBuilder) { 
-    this.player1 = new Player(1);
-    this.player2 = new Player(2);
-  }
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
     this.playersForm = this.fb.group({
@@ -28,12 +23,14 @@ export class PlayersComponent implements OnInit {
   setPlayerValue(player: number, value: string): void {
     // TODO: Fix two way binding when value is updated to empty string.
     value = this.validateValue(value);
+    let otherValue = value == 'X' ? 'O' : 'X';
     if (player === 1) {
       this.playersForm.get("player1Value").setValue(value);
+      this.playersForm.get("player2Value").setValue(otherValue);
     } else if (player === 2) {
       this.playersForm.get("player2Value").setValue(value);
+      this.playersForm.get("player1Value").setValue(otherValue);
     }
-    
   }
 
   validateValue(value: string): string {
