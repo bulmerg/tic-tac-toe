@@ -48,13 +48,13 @@ describe('AppComponent', () => {
   it('should display players value when clicked (row1, col1)', async(() => {
     const fixture = TestBed.createComponent(AppComponent);
     spyOn(fixture.componentInstance, 'handleSquareClick');
-    fixture.componentInstance.handleSquareClick();
+    fixture.componentInstance.handleSquareClick('X');
     const square = fixture.debugElement.nativeElement.querySelector('#square1');
     square.click();
     
     fixture.whenStable().then( () => {
       expect(fixture.componentInstance.handleSquareClick).toHaveBeenCalled();
-    // expect(fixture.componentInstance.)
+      expect(square.value).toEqual('X');
     });
     
   }));
