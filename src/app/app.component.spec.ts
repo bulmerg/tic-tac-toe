@@ -1,8 +1,9 @@
-import { TestBed, async } from '@angular/core/testing';
+import { TestBed, async, fakeAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
+import { tick, markDirty } from '@angular/core/src/render3';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -44,13 +45,17 @@ describe('AppComponent', () => {
     expect(compiled.querySelector('h1').textContent).toContain('Welcome to tic-tac-toe!');
   });
 
-  it('should display players value when clicked (row1, col1)', () => {
+  it('should display players value when clicked (row1, col1)', async(() => {
     const fixture = TestBed.createComponent(AppComponent);
+    spyOn(fixture.componentInstance, 'handleSquareClick');
     fixture.componentInstance.handleSquareClick();
     const square = fixture.debugElement.nativeElement.querySelector('#square1');
     square.click();
+    
     fixture.whenStable().then( () => {
       expect(fixture.componentInstance.handleSquareClick).toHaveBeenCalled();
+    // expect(fixture.componentInstance.)
     });
-  });
+    
+  }));
 });
