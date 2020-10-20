@@ -62,7 +62,16 @@ describe('PlayersComponent', () => {
   it('should populate player name correctly', () => {
     let playerId = 1;
     component.setPlayerName(playerId, 'Ted');
+  });
 
+  it('should automatically select the value for player2 once player1 value is entered and vise versa', () => {
+    let playerId = 1;
+    component.setPlayerValue(playerId, "X");
+    expect(component.playersForm.get("player2Value").value).toEqual("O");
+  
+    playerId = 2;
+    component.setPlayerValue(playerId, "X");
+    expect(component.playersForm.get("player1Value").value).toEqual("O");
   });
 
 });
