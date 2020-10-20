@@ -10,12 +10,18 @@
     height: 75px;
   }
 
-  table tr:nth-child(odd) {
+  table tr {
     background-color: #f1f1f1;
   }
 
-  table tr:nth-child(even) {
-    background-color: #ffffff;
+  .no-outline {
+    border-top-style: hidden;
+    border-right-style: hidden;
+    border-left-style: hidden;
+    border-bottom-style: hidden;
+    background-color: #f1f1f1;
+    outline: none;
+    text-align: center;
   }
 </style>
 <div style="text-align:center">
@@ -32,7 +38,7 @@
     <table>
       <tr #row1>
         <td id="square1Cell" (click)="handleSquareClick('X')">
-          <input formControlName="square1" readonly>
+          <input class="no-outline" formControlName="square1" readonly>
         </td>
         <td #square2></td>
         <td #square3></td>
