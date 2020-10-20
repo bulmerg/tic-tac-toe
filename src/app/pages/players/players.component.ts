@@ -37,6 +37,7 @@ export class PlayersComponent implements OnInit {
   }
 
   validateValue(value: string): string {
+    value = value.toUpperCase();
     return value === 'X' || value === 'O' ? value : '';
   }
 
