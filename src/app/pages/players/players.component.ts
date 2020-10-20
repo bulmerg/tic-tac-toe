@@ -25,7 +25,7 @@ export class PlayersComponent implements OnInit {
     });
   }
 
-  setPlayerValue(player: number, value: string) {
+  setPlayerValue(player: number, value: string): void {
     // TODO: Fix two way binding when value is updated to empty string.
     value = this.validateValue(value);
     if (player === 1) {
@@ -38,6 +38,14 @@ export class PlayersComponent implements OnInit {
 
   validateValue(value: string): string {
     return value === 'X' || value === 'O' ? value : '';
+  }
+
+  setPlayerName(player: number, value: string): void {
+    if (player === 1) {
+      this.playersForm.get("player1Name").setValue(value);
+    } else if (player === 2) {
+      this.playersForm.get("player2Name").setValue(value);
+    }
   }
 
 }

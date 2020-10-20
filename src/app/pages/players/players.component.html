@@ -11,7 +11,7 @@
     <label for="player2Name"></label>
     <input type="text" #player2Name formControlName="player2Name" placeholder="Player2 Name">
     <label for="player2Value"></label>
-    <input type="text" #player2Value formControlName="player1Value" placeholder="Player2 Value (X or O)" (input)="setPlayerValue(2, $event.target.value)"
+    <input type="text" #player2Value formControlName="player2Value" placeholder="Player2 Value (X or O)" (input)="setPlayerValue(2, $event.target.value)"
       maxlength=1>
   </div>
 </form>
