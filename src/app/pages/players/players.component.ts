@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
 import { Player } from '../../models/Player';
 
 @Component({
@@ -8,17 +7,23 @@ import { Player } from '../../models/Player';
   styleUrls: ['./players.component.css']
 })
 export class PlayersComponent implements OnInit {
-  players: Player[] = [];
+  player1: Player;
+  player2: Player;
   constructor() { 
-    
-    this.players.push(new Player());
-    this.players.push(new Player());
+    this.player1 = new Player(1);
+    this.player2 = new Player(2);
   }
 
   ngOnInit() {
   }
 
   setPlayerValue(player: number, value: string) {
-    this.players[player].value = value === 'X' || value === 'O' ? value : '';
+    if (player === 1) {
+      this.player1.value = value === 'X' || value === 'O' ? value : '';
+    } else if (player === 2) {
+      this.player2.value = value === 'X' || value === 'O' ? value : '';
+    }
+    
   }
+
 }

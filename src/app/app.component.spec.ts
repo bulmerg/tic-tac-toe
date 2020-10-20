@@ -1,6 +1,7 @@
 import { TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
@@ -41,25 +42,5 @@ describe('AppComponent', () => {
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
     expect(compiled.querySelector('h1').textContent).toContain('Welcome to tic-tac-toe!');
-  });
-
-  it('should have empty player1 name input', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    expect(fixture.componentInstance.player1.name.length).toBe(0);
-  });
-
-  it('should have and empty player1 value', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    expect(fixture.componentInstance.player1.value.length).toBe(0);
-  });
-
-  it('should have empty player2 name input', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    expect(fixture.componentInstance.player2.name.length).toBe(0);
-  });
-
-  it('should have and empty player2 value', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    expect(fixture.componentInstance.player2.value.length).toBe(0);
   });
 });
