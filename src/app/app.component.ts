@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Player } from './models/Player';
-import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +11,10 @@ export class AppComponent implements OnInit {
   title = 'tic-tac-toe';
   square = '';
   grid: FormGroup
-  constructor (private fb: FormBuilder) { }
+  currentPlayer: Player;
+  constructor (private fb: FormBuilder) { 
+
+  }
 
   ngOnInit(): void {
     this.grid = this.fb.group({
