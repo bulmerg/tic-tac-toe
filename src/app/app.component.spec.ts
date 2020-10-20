@@ -43,4 +43,14 @@ describe('AppComponent', () => {
     const compiled = fixture.debugElement.nativeElement;
     expect(compiled.querySelector('h1').textContent).toContain('Welcome to tic-tac-toe!');
   });
+
+  it('should display players value when clicked (row1, col1)', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    fixture.componentInstance.handleSquareClick();
+    const square = fixture.debugElement.nativeElement.querySelector('#square1');
+    square.click();
+    fixture.whenStable().then( () => {
+      expect(fixture.componentInstance.handleSquareClick).toHaveBeenCalled();
+    });
+  });
 });

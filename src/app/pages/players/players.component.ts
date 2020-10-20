@@ -18,6 +18,7 @@ export class PlayersComponent implements OnInit {
   }
 
   setPlayerValue(player: number, value: string) {
+    // TODO: Fix two way binding when value is updated to empty string.
     if (player === 1) {
       this.player1.value = value === 'X' || value === 'O' ? value : '';
     } else if (player === 2) {
