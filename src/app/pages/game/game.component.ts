@@ -28,11 +28,12 @@ export class GameComponent implements OnInit {
     });
   }
 
-  // buildSquares() {
-  //   for (let n = 0; n<this.gridSize; n++) {
-  //     this.squares.push(new FormControl(''));
-  //   }
-  // }
+  buildSquares() {
+    for (let n = 0; n<this.gridSize; n++) {
+      this.squares.push(new FormControl(''));
+    }
+  }
+  
   handleSquareClick(value: string) {
     this.grid.get("square1").setValue(value);
   }

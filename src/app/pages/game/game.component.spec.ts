@@ -37,5 +37,6 @@ describe('GameComponent', () => {
 
   it('should have 9 squares in the grid', () => {
     component.buildSquares();
+    expect(component.squares.length).toBe(9);
   });
 });
