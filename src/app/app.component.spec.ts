@@ -3,7 +3,6 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
-import { tick, markDirty } from '@angular/core/src/render3';
 
 describe('AppComponent', () => {
   let component: AppComponent;
@@ -43,23 +42,14 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'tic-tac-toe'`, () => {
+  it(`should have as title 'Tic-Tac-Toe'`, () => {
     const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('tic-tac-toe');
+    expect(app.title).toEqual('Tic-Tac-Toe');
   });
 
   it('should render title in a h1 tag', () => {
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to tic-tac-toe!');
+    expect(compiled.querySelector('h1').textContent).toContain('Welcome to Tic-Tac-Toe!');
   });
 
-  it('should display players value when clicked (row1, col1)', () => {
-    let componentRef = fixture.componentRef;
-    fixture.componentInstance.handleSquareClick('X');
-
-    fixture.whenStable().then( () => {
-      expect(fixture.componentInstance.handleSquareClick).toHaveBeenCalled();
-      expect(fixture.componentInstance.grid.get("square1").value).toEqual('X');
-    });
-  });
 });

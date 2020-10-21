@@ -1,0 +1,54 @@
+<style>
+  table,
+  th,
+  td {
+    border: 1px solid grey;
+    border-collapse: collapse;
+    padding: 5px;
+    column-width: 75px;
+    height: 75px;
+  }
+
+  table tr {
+    background-color: #f1f1f1;
+  }
+
+  .no-outline {
+    border-top-style: hidden;
+    border-right-style: hidden;
+    border-left-style: hidden;
+    border-bottom-style: hidden;
+    background-color: #f1f1f1;
+    outline: none;
+    text-align: center;
+  }
+</style>
+<form [formGroup]="grid">
+  <div>
+    <div class="row">
+      <div class="col-md-8 offset-md-2">
+        <table>
+          <tr #row1>
+            <td id="square1Cell" (click)="handleSquareClick('X')">
+              <input class="no-outline" formControlName="square1" readonly>
+            </td>
+            <td id="square2Cell" (click)="handleSquareClick('X')">
+              <input class="no-outline" formControlName="square2" readonly>
+            </td>
+            <td #square3></td>
+          </tr>
+          <tr #row2>
+            <td #square4></td>
+            <td #square5></td>
+            <td #square6></td>
+          </tr>
+          <tr #row3>
+            <td #square7></td>
+            <td #square8></td>
+            <td #square9></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</form>

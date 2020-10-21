@@ -8,23 +8,18 @@ import { FormGroup, FormBuilder } from '@angular/forms';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'tic-tac-toe';
+  title = 'Tic-Tac-Toe';
   square = '';
-  grid: FormGroup
+  
   currentPlayer: Player;
   constructor (private fb: FormBuilder) { 
 
   }
 
   ngOnInit(): void {
-    this.grid = this.fb.group({
-      square1: ['']
-    });
+
   }
 
-  handleSquareClick(value: string) {
-    this.grid.get("square1").setValue(value);
-    // this.square = value;
-  }
+  
 
 }

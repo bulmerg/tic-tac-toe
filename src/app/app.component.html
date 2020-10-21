@@ -1,29 +1,4 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<style>
-  table,
-  th,
-  td {
-    border: 1px solid grey;
-    border-collapse: collapse;
-    padding: 5px;
-    column-width: 75px;
-    height: 75px;
-  }
-
-  table tr {
-    background-color: #f1f1f1;
-  }
-
-  .no-outline {
-    border-top-style: hidden;
-    border-right-style: hidden;
-    border-left-style: hidden;
-    border-bottom-style: hidden;
-    background-color: #f1f1f1;
-    outline: none;
-    text-align: center;
-  }
-</style>
 <div style="text-align:center">
   <h1>
     Welcome to {{ title }}!
@@ -31,16 +6,18 @@
 </div>
 
 <div>
-  <players></players>
+  <!-- <players></players> -->
 </div>
-<form [formGroup]="grid">
+<!-- <form [formGroup]="grid">
   <div class="container">
     <table>
       <tr #row1>
         <td id="square1Cell" (click)="handleSquareClick('X')">
           <input class="no-outline" formControlName="square1" readonly>
         </td>
-        <td #square2></td>
+        <td id="square2Cell" (click)="handleSquareClick('X')">
+            <input class="no-outline" formControlName="square2" readonly>
+          </td>
         <td #square3></td>
       </tr>
       <tr #row2>
@@ -55,6 +32,6 @@
       </tr>
     </table>
   </div>
-</form>
+</form> -->
 
 <router-outlet></router-outlet>
