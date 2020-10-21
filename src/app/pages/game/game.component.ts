@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, PlatformRef } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Player } from 'src/app/models/Player';
@@ -12,9 +12,11 @@ import { PlayersService } from '../players/players.service';
 })
 export class GameComponent implements OnInit {
   players: Array<Player>;
+  squares: Array<Square>;
+  moves: Array<Square>; // In order of selected squares during play
   currentPlayer: Player;
   grid: FormGroup
-  squares: Array<Square>;
+  emptyPlayer = new Player(0, '', '');
   readonly gridSize = 9;
   constructor(private fb: FormBuilder, private playersService: PlayersService, private router: Router) {
   }
@@ -23,8 +25,12 @@ export class GameComponent implements OnInit {
     this.playersService.playersData.subscribe(data => {
       this.handlePlayerData(data);
     });
+    this.buildForm();
     this.buildSquares();
-    // this.squares = new FormArray([]);
+    this.moves = new Array<Square>();
+  }
+
+  buildForm() {
     this.grid = this.fb.group({
       square1: [''],
       square2: [''],
@@ -37,7 +43,6 @@ export class GameComponent implements OnInit {
       square9: ['']
     });
   }
-
   handlePlayerData(players: Array<Player>) {
     let navToSetup = false;
       if (players && players.length > 0) {
@@ -71,29 +76,32 @@ export class GameComponent implements OnInit {
   }
 
   buildSquares() {
-    this.squares = new Array<Square>();
+    if (!this.squares || this.squares.length != this.gridSize) {
+      this.squares = new Array<Square>();
+    }
+    
+    
     for (let n = 0; n < this.gridSize; n++) {
-      this.squares.push(new Square(n + 1, new Player(0, '', '')));
+      this.squares.push(new Square(n + 1, this.emptyPlayer));
     }
   }
 
   handleSquareClick(id: number) {
     this.grid.get(`square${id}`).setValue(this.currentPlayer.value);
-    // this.squares[id-1].id = id;
     this.squares[id - 1].player = { ...this.currentPlayer };
-    if (this.checkForWinner()) {
-      alert(`${this.currentPlayer.name} (${this.currentPlayer.value}) has won!!!`);
+    this.moves.push(this.squares[id-1]);
+    if (this.isGameOver()) {
+      alert(`Thank you for playing ${this.players[0].name} and ${this.players[1].name}!!!`);
     } else {
       this.nextPlayer();
     }
-
   }
 
   nextPlayer() {
     this.currentPlayer = this.currentPlayer.id === 1 ? this.players[1] : this.players[0];
   }
 
-  checkForWinner(): boolean {
+  isGameOver(): boolean {
     // TODO: Refactor this to clean up and make more readable.  Maybe compare to a series of winning groups.
     if (
       (this.currentPlayer.value == this.squares[0].player.value && this.squares[0].player.value === this.squares[1].player.value && this.squares[1].player.value === this.squares[2].player.value) || // rows
@@ -105,8 +113,52 @@ export class GameComponent implements OnInit {
       (this.currentPlayer.value == this.squares[0].player.value && this.squares[0].player.value === this.squares[4].player.value && this.squares[4].player.value === this.squares[8].player.value) || // diag
       (this.currentPlayer.value == this.squares[2].player.value && this.squares[2].player.value === this.squares[4].player.value && this.squares[4].player.value === this.squares[6].player.value)
     ) {
+      this.showWinner();
+      return true;
+    } else if (this.gridFull()) {
+      this.showTie();
       return true;
     }
     return false;
+  }
+
+  gridFull(): boolean {
+    let full = false;
+    if (this.squares && this.squares.length === this.gridSize) {
+      full = this.squares.every((square) => {
+        return square.player.id > 0;
+      });
+    }
+    return full;
+  }
+
+  showWinner() {
+    alert(`${this.currentPlayer.name} (${this.currentPlayer.value}) has won!!!`);
+  }
+
+  showTie() {
+    alert('Tie!!!');
+  }
+
+  rewind() {
+    if (this.moves.length > 0) {
+      let lastMove = this.moves[this.moves.length-1];
+      this.moves.pop();
+      this.squares[lastMove.id-1].player = this.emptyPlayer;
+      this.grid.get(`square${lastMove.id}`).setValue('');
+    }
+  }
+
+  reset() {
+    this.grid.reset();
+    this.squares.forEach((square) => {
+      square.player = this.emptyPlayer;
+    });
+    this.ngOnInit();
+  }
+
+  changePlayers() {
+    this.grid.reset();
+    this.router.navigate(['setup']);
   }
 }
