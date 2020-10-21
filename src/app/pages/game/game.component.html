@@ -24,28 +24,43 @@
   }
 </style>
 <form [formGroup]="grid">
+  <span>Current Player: {{currentPlayer?.name}}</span>
   <div>
     <div class="row">
       <div class="col-md-8 offset-md-2">
         <table>
           <tr #row1>
-            <td id="square1Cell" (click)="handleSquareClick('X')">
+            <td id="square1Cell" (click)="handleSquareClick(1)">
               <input class="no-outline" formControlName="square1" readonly>
             </td>
-            <td id="square2Cell" (click)="handleSquareClick('X')">
+            <td id="square2Cell" (click)="handleSquareClick(2)">
               <input class="no-outline" formControlName="square2" readonly>
             </td>
-            <td #square3></td>
+            <td id="square3Cell" (click)="handleSquareClick(3)">
+              <input class="no-outline" formControlName="square3" readonly>
+            </td>
           </tr>
           <tr #row2>
-            <td #square4></td>
-            <td #square5></td>
-            <td #square6></td>
+            <td id="square4Cell" (click)="handleSquareClick(4)">
+              <input class="no-outline" formControlName="square4" readonly>
+            </td>
+            <td id="square5Cell" (click)="handleSquareClick(5)">
+              <input class="no-outline" formControlName="square5" readonly>
+            </td>
+            <td id="square6Cell" (click)="handleSquareClick(6)">
+              <input class="no-outline" formControlName="square6" readonly>
+            </td>
           </tr>
           <tr #row3>
-            <td #square7></td>
-            <td #square8></td>
-            <td #square9></td>
+            <td id="square7Cell" (click)="handleSquareClick(7)">
+              <input class="no-outline" formControlName="square7" readonly>
+            </td>
+            <td id="square8Cell" (click)="handleSquareClick(8)">
+              <input class="no-outline" formControlName="square8" readonly>
+            </td>
+            <td id="square9Cell" (click)="handleSquareClick(9)">
+              <input class="no-outline" formControlName="square9" readonly>
+            </td>
           </tr>
         </table>
       </div>

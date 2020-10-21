@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Player } from '../../models/Player';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { PlayersService } from './players.service';
+
 
 @Component({
   selector: 'players',
@@ -8,15 +10,19 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./players.component.css']
 })
 export class PlayersComponent implements OnInit {
+  @Output() playGame: EventEmitter<boolean> = new EventEmitter<boolean>();
   playersForm: FormGroup;
-  constructor(private fb: FormBuilder) { }
+  constructor(
+    private fb: FormBuilder,
+    private playersService: PlayersService
+    ) { }
 
   ngOnInit() {
     this.playersForm = this.fb.group({
-      player1Name: [''],
-      player1Value: [''],
-      player2Name: [''],
-      player2Value: ['']
+      player1Name: ['', Validators.required],
+      player1Value: ['', Validators.required],
+      player2Name: ['', Validators.required],
+      player2Value: ['', Validators.required]
     });
   }
 
@@ -43,6 +49,25 @@ export class PlayersComponent implements OnInit {
       this.playersForm.get("player1Name").setValue(value);
     } else if (player === 2) {
       this.playersForm.get("player2Name").setValue(value);
+    }
+  }
+
+  submit() {
+    let players = new Array<Player>();
+    players.push({
+      id: 1,
+      name: this.playersForm.get("player1Name").value,
+      value: this.playersForm.get("player1Value").value
+    });
+
+    players.push({
+      id: 2,
+      name: this.playersForm.get("player2Name").value,
+      value: this.playersForm.get("player2Value").value
+    });
+    this.playersService.setPlayers(players);
+    if (this.playersForm.valid) {
+      this.playGame.emit(true)
     }
   }
 

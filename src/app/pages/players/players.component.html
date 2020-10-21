@@ -14,4 +14,7 @@
     <input type="text" #player2Value formControlName="player2Value" placeholder="Player2 Value (X or O)" (input)="setPlayerValue(2, $event.target.value)"
       maxlength=1>
   </div>
+  <div class="container">
+    <button type="submit" (click)="submit()">Play Game</button>
+  </div>
 </form>

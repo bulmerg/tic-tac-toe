@@ -7,13 +7,16 @@ import { AppComponent } from './app.component';
 import { PlayersComponent } from './pages/players/players.component';
 import { SquareComponent } from './fragments/square/square.component';
 import { GameComponent } from './pages/game/game.component';
+import { SetupComponent } from './pages/setup/setup.component';
+import { PlayersService } from './pages/players/players.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     PlayersComponent,
     SquareComponent,
-    GameComponent
+    GameComponent,
+    SetupComponent
   ],
   imports: [
     BrowserModule,
@@ -21,7 +24,7 @@ import { GameComponent } from './pages/game/game.component';
     ReactiveFormsModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [PlayersService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
