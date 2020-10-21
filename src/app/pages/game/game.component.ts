@@ -17,7 +17,9 @@ export class GameComponent implements OnInit {
   currentPlayer: Player;
   grid: FormGroup
   emptyPlayer = new Player(0, '', '');
+  gameEndMessage = '';
   readonly gridSize = 9;
+  thankYouMessage: string;
   constructor(private fb: FormBuilder, private playersService: PlayersService, private router: Router) {
   }
 
@@ -91,7 +93,7 @@ export class GameComponent implements OnInit {
     this.squares[id - 1].player = { ...this.currentPlayer };
     this.moves.push(this.squares[id-1]);
     if (this.isGameOver()) {
-      alert(`Thank you for playing ${this.players[0].name} and ${this.players[1].name}!!!`);
+      this.thankYouMessage = `Thank you for playing ${this.players[0].name} and ${this.players[1].name}!!!`;
     } else {
       this.nextPlayer();
     }
@@ -133,15 +135,16 @@ export class GameComponent implements OnInit {
   }
 
   showWinner() {
-    alert(`${this.currentPlayer.name} (${this.currentPlayer.value}) has won!!!`);
+    this.gameEndMessage = `${this.currentPlayer.name} (${this.currentPlayer.value}) has won!!!`;
   }
 
   showTie() {
-    alert('Tie!!!');
+    this.gameEndMessage = `${this.players[0].name} and ${this.players[1].name} have tied!!`
   }
 
   rewind() {
     if (this.moves.length > 0) {
+      this.gameEndMessage = '';
       let lastMove = this.moves[this.moves.length-1];
       this.moves.pop();
       this.squares[lastMove.id-1].player = this.emptyPlayer;
@@ -150,6 +153,7 @@ export class GameComponent implements OnInit {
   }
 
   reset() {
+    this.gameEndMessage = '';
     this.grid.reset();
     this.squares.forEach((square) => {
       square.player = this.emptyPlayer;

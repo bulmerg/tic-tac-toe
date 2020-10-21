@@ -22,10 +22,21 @@
     outline: none;
     text-align: center;
   }
+
+  .game-end {
+    font-size: large;
+    color: green;
+  }
 </style>
 <form [formGroup]="grid">
- 
+
   <div class="container content">
+    <div class="row">
+      <div *ngIf="gameEndMessage.length > 0" class="col-lg">
+        <span class="game-end">{{thankYouMessage}}</span><br>
+        <span class="game-end" id="gameend">{{gameEndMessage}}</span>
+      </div>
+    </div>
     <div class="row">
       <div class="col-sm col-md col-lg">
         <span>Current Player: {{currentPlayer?.name}}</span>
