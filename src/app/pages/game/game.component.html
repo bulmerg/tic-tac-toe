@@ -24,10 +24,11 @@
   }
 </style>
 <form [formGroup]="grid">
-  <span>Current Player: {{currentPlayer?.name}}</span>
-  <div>
+ 
+  <div class="container content">
     <div class="row">
-      <div class="col-md-8 offset-md-2">
+      <div class="col-sm col-md col-lg">
+        <span>Current Player: {{currentPlayer?.name}}</span>
         <table>
           <tr #row1>
             <td id="square1Cell" (click)="handleSquareClick(1)">
@@ -66,7 +67,7 @@
       </div>
     </div>
   </div>
-  <div class=container>
+  <div class="container btn btn-primary button-padding">
     <button (click)="rewind()">Rewind Previous Move</button>
     <button (click)="reset()">Reset Game</button>
     <button (click)="changePlayers()">Start Over with New Players</button>

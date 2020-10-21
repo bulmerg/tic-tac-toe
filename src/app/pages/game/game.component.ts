@@ -8,7 +8,7 @@ import { PlayersService } from '../players/players.service';
 @Component({
   selector: 'game',
   templateUrl: './game.component.html',
-  styleUrls: ['./game.component.css']
+  styleUrls: ['./game.component.scss']
 })
 export class GameComponent implements OnInit {
   players: Array<Player>;

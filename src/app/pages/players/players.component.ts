@@ -7,7 +7,7 @@ import { PlayersService } from './players.service';
 @Component({
   selector: 'players',
   templateUrl: './players.component.html',
-  styleUrls: ['./players.component.css']
+  styleUrls: ['./players.component.scss']
 })
 export class PlayersComponent implements OnInit {
   @Output() playGame: EventEmitter<boolean> = new EventEmitter<boolean>();
